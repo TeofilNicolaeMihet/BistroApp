@@ -1,5 +1,7 @@
 package com.example.bistro.bistroapp.entity;
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,12 +23,12 @@ public class Order {
     )
     private Set<Product> products = new HashSet<>();
 
-    private double totalAmount;
+    private BigDecimal totalAmount;
 
     public Order(  double totalAmount) {
 
 
-        this.totalAmount = totalAmount;
+        this.totalAmount = BigDecimal.valueOf(totalAmount);
     }
 
     public Order() {
@@ -57,11 +59,11 @@ public class Order {
         this.products = products;
     }
 
-    public double getTotalAmount() {
+    public BigDecimal getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(double totalAmount) {
+    public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
 }

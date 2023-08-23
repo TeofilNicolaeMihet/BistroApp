@@ -1,6 +1,7 @@
 package com.example.bistro.bistroapp.service;
 
 import com.example.bistro.bistroapp.entity.Ingredient;
+import com.example.bistro.bistroapp.exception.IngredientNotFoundException;
 import com.example.bistro.bistroapp.repository.IngredientRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -24,7 +25,8 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public Ingredient getIngredientById(Long id) {
-        return ingredientRepository.findById(id).orElse(null);
+        return ingredientRepository.findById(id)
+                .orElseThrow(() -> new IngredientNotFoundException(id));
     }
 
 }

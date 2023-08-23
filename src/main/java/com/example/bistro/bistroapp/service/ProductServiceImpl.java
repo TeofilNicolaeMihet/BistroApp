@@ -1,6 +1,7 @@
 package com.example.bistro.bistroapp.service;
 
 import com.example.bistro.bistroapp.entity.Product;
+import com.example.bistro.bistroapp.entity.ProductType;
 import com.example.bistro.bistroapp.exception.ProductNotFoundException;
 import com.example.bistro.bistroapp.repository.IngredientRepository;
 import com.example.bistro.bistroapp.repository.ProductRepository;
@@ -8,7 +9,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -22,7 +25,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getTopMostWantedProducts(int count) {
-        return productRepository.findTopMostWantedProducts(PageRequest.of(0, count));
+        List <Product> topProducts = productRepository.findTopMostWantedProducts(PageRequest.of(0, count));
+
+        if (topProducts.isEmpty()) {
+            System.out.println("There are no orders at the time.");
+        }
+
+        return topProducts;
     }
 
 
@@ -33,7 +42,20 @@ public class ProductServiceImpl implements ProductService {
     }
     @Override
     public Product addProduct(Product product) {
+        //return productRepository.save(product);
+        if (!isValidProductType(product.getType())) {
+            throw new IllegalArgumentException("Tipul de produs nu este permis.");
+        }
         return productRepository.save(product);
+    }
+    public boolean isValidProductType(ProductType productType) {
+        Set<ProductType> allowedProductTypes = EnumSet.of(
+                ProductType.CAKE, ProductType.WAFFLES, ProductType.CROISSANT,
+                ProductType.DONUT, ProductType.PASTA, ProductType.PIZZA,
+                ProductType.RISOTTO
+        );
+
+        return allowedProductTypes.contains(productType);
     }
     @Override
     public List<Product> getAllProducts() {

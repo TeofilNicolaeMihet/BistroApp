@@ -13,6 +13,8 @@ public class Product {
     private String name;
     private double price; @Column(columnDefinition = "INT DEFAULT 0")
     private int popularity;
+    @Enumerated(EnumType.STRING)
+    private ProductType type;
 
 
 @ManyToMany
@@ -26,6 +28,13 @@ private Set<Ingredient> ingredients = new HashSet<>();
     @ManyToMany(mappedBy = "products")
     private Set<Order> orders = new HashSet<>();
 
+    public ProductType getType() {
+        return type;
+    }
+
+    public void setType(ProductType type) {
+        this.type = type;
+    }
 
     public Product(String name, double price, Set<Ingredient> ingredients, Set<Order> orders) {
         this.name = name;

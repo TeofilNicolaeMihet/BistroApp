@@ -10,6 +10,8 @@ import com.example.bistro.bistroapp.repository.IngredientRepository;
 import com.example.bistro.bistroapp.repository.OrderRepository;
 import com.example.bistro.bistroapp.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -42,7 +44,7 @@ public class OrderServiceImpl implements OrderService{
                 .sum();
 
         Order order = new Order();
-        order.setTotalAmount(totalAmount);
+        order.setTotalAmount(BigDecimal.valueOf(totalAmount));
 
         return orderRepository.save(order);
     }

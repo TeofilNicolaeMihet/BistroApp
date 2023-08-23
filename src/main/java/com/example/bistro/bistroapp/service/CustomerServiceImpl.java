@@ -1,6 +1,7 @@
 package com.example.bistro.bistroapp.service;
 
 import com.example.bistro.bistroapp.entity.Customer;
+import com.example.bistro.bistroapp.exception.CustomerNotFoundException;
 import com.example.bistro.bistroapp.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void removeCustomer(Long id) {
         customerRepository.deleteById(id);
+    }
+
+    @Override
+    public Customer getCustomerById(Long id) {
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new CustomerNotFoundException(id));
     }
 }
