@@ -85,7 +85,7 @@ public class ConsoleHandlerProduct {
             }
         }
     }
-    public void getProductWithID()
+    public void getProductWithId()
     {
         System.out.println("Enter the product ID:");
         Long productId = scanner.nextLong();

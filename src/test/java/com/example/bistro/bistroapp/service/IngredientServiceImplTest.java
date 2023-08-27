@@ -3,6 +3,7 @@ package com.example.bistro.bistroapp.service;
 import com.example.bistro.bistroapp.entity.Ingredient;
 import com.example.bistro.bistroapp.repository.IngredientRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -29,6 +30,7 @@ public class IngredientServiceImplTest {
     }
 
     @Test
+    @DisplayName("Adding ingredients")
     public void testAddIngredient() {
         Ingredient ingredient = new Ingredient();
         ingredient.setName("Garlic");
@@ -42,6 +44,7 @@ public class IngredientServiceImplTest {
     }
 
     @Test
+    @DisplayName("Getting all ingredients")
     public void testGetAllIngredients() {
         Ingredient ingredient1 = new Ingredient();
         ingredient1.setName("Onion");
@@ -62,6 +65,7 @@ public class IngredientServiceImplTest {
     }
 
     @Test
+    @DisplayName("Getting ingredient by ID")
     public void testGetIngredientById() {
         Ingredient ingredient = new Ingredient();
         ingredient.setId(1L);

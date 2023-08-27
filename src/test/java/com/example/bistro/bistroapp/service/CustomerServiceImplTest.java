@@ -1,14 +1,14 @@
 package com.example.bistro.bistroapp.service;
 
 import com.example.bistro.bistroapp.entity.Customer;
+import com.example.bistro.bistroapp.exception.CustomerNotFoundException;
 import com.example.bistro.bistroapp.repository.CustomerRepository;
-import com.example.bistro.bistroapp.service.CustomerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,21 +28,28 @@ public class CustomerServiceImplTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        ReflectionTestUtils.setField(customerService, "customerRepository", customerRepository);
     }
 
     @Test
+    @DisplayName("Adding Customer")
     public void testAddCustomer() {
         Customer customer = new Customer();
+        customer.setId(1L);
+        customer.setFirstName("Teofil");
+        customer.setLastName("Mihet");
         when(customerRepository.save(any(Customer.class))).thenReturn(customer);
 
         Customer result = customerService.addCustomer(customer);
 
         verify(customerRepository, times(1)).save(customer);
         Assertions.assertEquals(customer, result);
+        Assertions.assertEquals(1L, result.getId());
+        Assertions.assertEquals("Teofil", result.getFirstName());
+        Assertions.assertEquals("Mihet", result.getLastName());
     }
 
     @Test
+    @DisplayName("Getting all customers")
     public void testGetAllCustomers() {
         List<Customer> customers = new ArrayList<>();
         when(customerRepository.findAll()).thenReturn(customers);
@@ -54,6 +61,7 @@ public class CustomerServiceImplTest {
     }
 
     @Test
+    @DisplayName("Removing customer")
     public void testRemoveCustomer() {
         Long customerId = 1L;
 
@@ -63,6 +71,7 @@ public class CustomerServiceImplTest {
     }
 
     @Test
+    @DisplayName("Getting customer by Id")
     public void testGetCustomerById() {
         Long customerId = 1L;
         Customer customer = new Customer();
@@ -72,5 +81,27 @@ public class CustomerServiceImplTest {
 
         verify(customerRepository, times(1)).findById(customerId);
         Assertions.assertEquals(customer, result);
+    }
+    @Test
+    @DisplayName("Gedding customer - negative case")
+    public void testAddCustomerNegativeCase() {
+
+        when(customerRepository.save(any(Customer.class))).thenThrow(new RuntimeException("Customer already exists"));
+
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            customerService.addCustomer(new Customer());
+        });
+    }
+
+    @Test
+    @DisplayName("Getting customer by ID - negative case")
+    public void testGetCustomerByIdNegativeCase() {
+
+        Long customerId = 1L;
+        when(customerRepository.findById(customerId)).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(CustomerNotFoundException.class, () -> {
+            customerService.getCustomerById(customerId);
+        });
     }
 }

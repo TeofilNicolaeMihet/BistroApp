@@ -5,6 +5,7 @@ import com.example.bistro.bistroapp.entity.ProductType;
 import com.example.bistro.bistroapp.exception.ProductNotFoundException;
 import com.example.bistro.bistroapp.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -31,6 +32,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
+    @DisplayName("Getting top most wanted products")
     public void testGetTopMostWantedProducts() {
         List<Product> products = new ArrayList<>();
         when(productRepository.findTopMostWantedProducts(PageRequest.of(0, 3))).thenReturn(products);
@@ -42,6 +44,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
+    @DisplayName("Getting product with ID")
     public void testGetProductWithIngredients() {
         Long productId = 1L;
         Product product = new Product();
@@ -54,6 +57,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
+    @DisplayName("Adding product")
     public void testAddProduct_ValidType() {
         Product product = new Product();
         product.setType(ProductType.PIZZA);
@@ -66,6 +70,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
+    @DisplayName("Getting all product")
     public void testGetAllProducts() {
         List<Product> products = new ArrayList<>();
         when(productRepository.findAll()).thenReturn(products);
@@ -77,6 +82,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
+    @DisplayName("Getting product by ID")
     public void testGetProductById() {
         Long productId = 1L;
         Product product = new Product();
@@ -89,6 +95,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
+    @DisplayName("Updating product price")
     public void testUpdateProductPrice() {
         Long productId = 1L;
         double newPrice = 15.0;
@@ -105,6 +112,7 @@ public class ProductServiceImplTest {
     }
 
     @Test
+    @DisplayName("Removing product")
     public void testRemoveProduct() {
         Long productId = 1L;
 

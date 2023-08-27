@@ -8,6 +8,7 @@ import com.example.bistro.bistroapp.repository.CustomerRepository;
 import com.example.bistro.bistroapp.repository.OrderRepository;
 import com.example.bistro.bistroapp.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -40,6 +41,7 @@ public class OrderServiceImplTest {
     }
 
     @Test
+    @DisplayName("Creating new order")
     public void testCreateOrder() {
         Long customerId = 1L;
         List<Long> productIds = Collections.singletonList(2L);
@@ -62,6 +64,7 @@ public class OrderServiceImplTest {
     }
 
     @Test
+    @DisplayName("Getting all orders")
     public void testGetAllOrders() {
         Order order1 = new Order();
         Order order2 = new Order();
@@ -74,6 +77,7 @@ public class OrderServiceImplTest {
     }
 
     @Test
+    @DisplayName("Getting order by ID")
     public void testGetOrderById() {
         Long orderId = 1L;
         Order order = new Order();
@@ -88,6 +92,7 @@ public class OrderServiceImplTest {
     }
 
     @Test
+    @DisplayName("Removing order")
     public void testRemoveOrder() {
         Long orderId = 1L;
         Order order = new Order();

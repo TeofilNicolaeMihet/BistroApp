@@ -7,16 +7,16 @@ import java.util.*;
 public class BistroMenu {
 
     private final Scanner scanner = new Scanner(System.in);
-    private final ConsoleHandlerCustomer consolHandlerCustomer;
-    private final ConsoleHandlerIngredient consolHandlerIngredient;
-    private final ConsoleHandlerOrder consolHandlerOrder;
-    private final ConsoleHandlerProduct consolHandlerProduct;
+    private final ConsoleHandlerCustomer consoleHandlerCustomer;
+    private final ConsoleHandlerIngredient consoleHandlerIngredient;
+    private final ConsoleHandlerOrder consoleHandlerOrder;
+    private final ConsoleHandlerProduct consoleHandlerProduct;
 
-    public BistroMenu(ConsoleHandlerCustomer consolHandlerCustomer, ConsoleHandlerIngredient consolHandlerIngredient, ConsoleHandlerOrder consolHandlerOrder, ConsoleHandlerProduct consolHandlerProduct) {
-        this.consolHandlerCustomer = consolHandlerCustomer;
-        this.consolHandlerIngredient = consolHandlerIngredient;
-        this.consolHandlerOrder = consolHandlerOrder;
-        this.consolHandlerProduct = consolHandlerProduct;
+    public BistroMenu(ConsoleHandlerCustomer consoleHandlerCustomer, ConsoleHandlerIngredient consoleHandlerIngredient, ConsoleHandlerOrder consoleHandlerOrder, ConsoleHandlerProduct consoleHandlerProduct) {
+        this.consoleHandlerCustomer = consoleHandlerCustomer;
+        this.consoleHandlerIngredient = consoleHandlerIngredient;
+        this.consoleHandlerOrder = consoleHandlerOrder;
+        this.consoleHandlerProduct = consoleHandlerProduct;
     }
 
     public void runConsole() {
@@ -45,46 +45,46 @@ public class BistroMenu {
 
             switch (choice) {
                 case 1:
-                    consolHandlerProduct.addProduct();
+                    consoleHandlerProduct.addProduct();
                     break;
 
                 case 2:
-                    consolHandlerProduct.listAllProduct();
+                    consoleHandlerProduct.listAllProduct();
                     break;
 
                 case 3:
-                    consolHandlerProduct.getProductWithID();
+                    consoleHandlerProduct.getProductWithId();
                     break;
                 case 4:
-                    consolHandlerProduct.updateProductPrice();
+                    consoleHandlerProduct.updateProductPrice();
                     break;
                 case 5:
-                    consolHandlerProduct.deleteProduct();
+                    consoleHandlerProduct.deleteProduct();
                     break;
                 case 6:
-                    consolHandlerCustomer.addCustomer();
+                    consoleHandlerCustomer.addCustomer();
                     break;
                 case 7:
-                    consolHandlerCustomer.listAllCustomer();
+                    consoleHandlerCustomer.listAllCustomer();
                     break;
                 case 8:
-                    consolHandlerCustomer.deleteCusomer();
+                    consoleHandlerCustomer.deleteCusomer();
                     break;
                 case 9:
                     int topCount = 3;
-                    consolHandlerProduct.printTopMostWantedProducts(topCount);
+                    consoleHandlerProduct.printTopMostWantedProducts(topCount);
                     break;
                 case 10:
-                    consolHandlerOrder.addAnOrder();
+                    consoleHandlerOrder.addAnOrder();
                     break;
                 case 11:
-                    consolHandlerOrder.listAllOrder();
+                    consoleHandlerOrder.listAllOrder();
                     break;
                 case 12:
-                    consolHandlerIngredient.addIngredient();
+                    consoleHandlerIngredient.addIngredient();
                     break;
                 case 13:
-                    consolHandlerIngredient.listAllIngredient();
+                    consoleHandlerIngredient.listAllIngredient();
                     break;
                 case 0:
                     running = false;

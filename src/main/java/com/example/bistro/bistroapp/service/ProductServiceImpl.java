@@ -42,9 +42,8 @@ public class ProductServiceImpl implements ProductService {
     }
     @Override
     public Product addProduct(Product product) {
-        //return productRepository.save(product);
         if (!isValidProductType(product.getType())) {
-            throw new IllegalArgumentException("Tipul de produs nu este permis.");
+            throw new IllegalArgumentException("This kind of product is not permitted");
         }
         return productRepository.save(product);
     }
