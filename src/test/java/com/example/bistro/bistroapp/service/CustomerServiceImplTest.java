@@ -29,24 +29,28 @@ public class CustomerServiceImplTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
+    private static final Long CUSTOMER_ID = 1L;
+    private static final String FIRST_NAME = "Teofil";
+    private static final String LAST_NAME = "Mihet";
 
     @Test
     @DisplayName("Adding Customer")
     public void testAddCustomer() {
         Customer customer = new Customer();
-        customer.setId(1L);
-        customer.setFirstName("Teofil");
-        customer.setLastName("Mihet");
+        customer.setId(CUSTOMER_ID);
+        customer.setFirstName(FIRST_NAME);
+        customer.setLastName(LAST_NAME);
         when(customerRepository.save(any(Customer.class))).thenReturn(customer);
 
         Customer result = customerService.addCustomer(customer);
 
         verify(customerRepository, times(1)).save(customer);
         Assertions.assertEquals(customer, result);
-        Assertions.assertEquals(1L, result.getId());
-        Assertions.assertEquals("Teofil", result.getFirstName());
-        Assertions.assertEquals("Mihet", result.getLastName());
+        Assertions.assertEquals(CUSTOMER_ID, result.getId());
+        Assertions.assertEquals(FIRST_NAME, result.getFirstName());
+        Assertions.assertEquals(LAST_NAME, result.getLastName());
     }
+
 
     @Test
     @DisplayName("Getting all customers")
